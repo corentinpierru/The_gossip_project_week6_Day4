@@ -16,7 +16,7 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>Auteur : <%= gossips.user.first_name %></li>
             <li>Voici le lien du potin :<%= link_to "See this gossip", gossip_path(gossips.id) %></a></li>
-            <li>Voici le lien de la ville de l'auteur: <%= link_to "Ville", city_path(gossips.id) %></a></li>
+            <li>Voici le lien de la ville de l'auteur: <%= link_to "#{gossips.user.city.name}", city_path(gossips.id) %></a></li>
           </ul>
         </div>
       </div>

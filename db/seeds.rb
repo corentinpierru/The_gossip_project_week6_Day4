@@ -6,11 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-TagGossip.destroy_all
-User.all.destroy_all
-Tag.all.destroy_all
-City.all.destroy_all
-Gossip.all.destroy_all
+User.destroy_all
+City.destroy_all
+Gossip.destroy_all
 
 
 10.times do |index|
@@ -20,6 +18,7 @@ Gossip.all.destroy_all
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.first_name,
+    password: Faker::Lorem.characters(number: 10, min_alpha: 10),
     description: Faker::Lorem.sentence(word_count: 15),
     email: Faker::Internet.email,
     age: Faker::Number.between(from: 1, to: 90),
@@ -32,15 +31,5 @@ Gossip.all.destroy_all
     title: Faker::Lorem.characters(number: 10, min_alpha: 10),
     content: Faker::Lorem.sentence(word_count: 15),
     user: User.find(rand(User.first.id..User.last.id)),
-  )
-end
-
-10.times do |index|
-  Tag.create!(
-    title: Faker::Lorem.sentence(word_count: 1),
-  )
-  TagGossip.create!(
-    tag: Tag.find(rand(Tag.first.id..Tag.last.id)),
-    gossip: Gossip.find(rand(Gossip.first.id..Gossip.last.id)),
   )
 end

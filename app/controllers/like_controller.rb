@@ -12,8 +12,9 @@ class LikeController < GossipsController
   def create
     @like = Like.new(gossip_id: params['gossip_id'], comment_id: params['comment_id'].to_i)
     if @like.save
-      redirect_to gossips_path
-    else 
+      render.new
+    else
+      flash[:danger] = "le like n'a pas fonctionné"
       render :new
     end
   end
