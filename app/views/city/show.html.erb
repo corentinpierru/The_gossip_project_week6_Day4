@@ -1,0 +1,17 @@
+<h1><%= @gossip.user.city.name %></h1></br>
+<% Gossip.all.each do |gossip_object| %>
+  <!-- Pour chaque gossip verifie que le nom du user de la city correspond -->
+  <% if @gossip.user.city.name == gossip_object.user.city.name %>
+  <div class="container">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header text-center">       
+          <p> <%= gossip_object.title %></p>
+          </div>
+          <div class="card-body">
+          <p> <%= gossip_object.content %></p>
+        </div>       
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,25 @@
+<% if session[:user_id] %>
+  <h1>Bienvenue <%= User.find_by(id: session[:user_id]).first_name %> !</h1></br>
+<% else %>
+  <h1> Penses à t'inscrire ou te connecter </h1>
+<% end %>
+</br>
+<% Gossip.all.each_with_index do |gossips, index|%>
+  <div class="container">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Potin numéro <%= gossips.id %> :</h4>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title pricing-card-title"><%= gossips.title %></h4>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Auteur : <%= gossips.user.first_name %></li>
+            <li>Voici le lien du potin :<%= link_to "See this gossip", gossip_path(gossips.id) %></a></li>
+            <li>Voici le lien de la ville de l'auteur: <%= link_to "Ville", city_path(gossips.id) %></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

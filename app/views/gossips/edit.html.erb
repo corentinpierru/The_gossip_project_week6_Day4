@@ -1,0 +1,24 @@
+<h1>Bienvenue sur la page edition de Gossip</h1>
+  <h4> Saisis le titre du potin ici : </h4>
+  <form action="#{edit_gossip_path}" method="GET"></br>
+  <input type="text" name="title">
+  </br>
+  <h4> Saisis le contenu du potin ici : </h4></br>
+  <form action= "#{edit_gossip_path}" method="GET"></br>
+  <input type="text" name="content">
+  <input type="submit" value="Envoyer le formulaire">
+</form>
+<% if @gossip != nil %>
+<% if @gossip.errors.any? %>
+  <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @gossip.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%end%>
+
+
+  
+  

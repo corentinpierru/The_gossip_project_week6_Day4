@@ -1,0 +1,21 @@
+<% flash.each do %>
+  <div class="alert alert-danger" role="alert">
+     <%= flash[:danger] %>
+  </div>
+<%end%>
+<div class="container card-body bg-light">
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
+    <div class= " card-title"> 
+    <p>Email :<p>
+    <form action="/sessions" method="POST">
+    <input type="text" name="email" size="100">
+    </div>
+    <div class= "card-body"> 
+    <p>Password :</p>
+    <form action="/sessions" method="POST">
+    <input class="inputfield" type="text" name="password" size="100"></br>
+    <input type="submit" value="Se connecter">
+    </div>
+  </form>
+<%end%>
+</div>

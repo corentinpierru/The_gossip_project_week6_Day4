@@ -1,0 +1,47 @@
+<h1>Potin</h1></br>
+<div class="container">
+<div class="card-deck mb-3 text-center">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">Voici le potin :</h4>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title pricing-card-title">Titre : <%= @gossip.title%></a></h4>
+      <ul class="list-unstyled mt-3 mb-4 text-left">
+        <li>Son contenu : <%= @gossip.content%></a>
+          <form action ="/like" method= "POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="submit" class = "btn btn-info" value="LIKE : <%= @gossip.likes.size %>">
+          <input type="hidden" name="@gossip_id" value="<%= @gossip.id %>">
+        </li>
+        <li>L'auteur :<%= link_to "#{@gossip.user.first_name}", user_path%></li>
+        <li>La ville de l'utilisateur <%= link_to "#{@gossip.user.city.name}", city_path%></li>
+        <% if current_user == @gossip.user %>
+        <li>Edit le potin <%= link_to "ici", edit_gossip_path%></li>
+        <li>Detruis le potin <%= link_to "ici", gossip_path, method:"DELETE"%></li>
+        <% end %>        
+        <p> Commentaires :</p>
+        <ul>
+        <% @gossip.comments.each do |comment| %>        
+        <li> commentaire : <%= comment.content %>
+        <form action ="/like" method= "POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" class = "btn btn-info" value="LIKE : <%= comment.likes.size %>">
+        <input type="hidden" name="comment_id" value="<%= comment.id %>">
+        </form>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+  </div>
+</div>
+<div id= "comment_section" class= "card-body">
+  <p> Saisis ton commentaire ici : </p>
+  <form action= "/comment" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input class= "inputfield" type="text" name="content" size="50">
+    <input type="submit" value="Commenter">
+    <input type="hidden" name="gossip_id" value="<%= @gossip.id %>">
+  </form>
+</div>
